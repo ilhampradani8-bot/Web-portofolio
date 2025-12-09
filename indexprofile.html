@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Ilham Pradani | Data Expert & Full Stack</title>
+    <meta name="description" content="Portfolio Ilham Pradani - Data Expert & Full Stack Engineer">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+
+    <!-- Custom Config for Tailwind -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Glassmorphism & Utilities */
+        body {
+            background-color: #0a0e17;
+            color: #e2e8f0;
+        }
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card {
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .glass-card:hover {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: rgba(6, 182, 212, 0.3);
+        }
+        
+        /* Animation Classes */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .delay-100 { transition-delay: 100ms; }
+        .delay-200 { transition-delay: 200ms; }
+        .delay-300 { transition-delay: 300ms; }
+    </style>
+</head>
+<body class="overflow-x-hidden selection:bg-cyan-500/30 selection:text-cyan-200">
+
+    <!-- Background Gradients -->
+    <div class="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <div class="absolute top-[-10%] right-[-5%] w-[500px] h-[500px] rounded-full bg-cyan-600/20 blur-[100px] animate-pulse-slow"></div>
+        <div class="absolute bottom-[-10%] left-[-5%] w-[600px] h-[600px] rounded-full bg-indigo-600/20 blur-[100px] animate-pulse-slow"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 font-bold text-2xl tracking-tighter flex items-center relative cursor-pointer group">
+                    <span class="absolute inset-0 bg-cyan-500 blur-xl opacity-20 group-hover:opacity-40 transition-opacity"></span>
+                    <span class="relative text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-500 to-indigo-500">
+                        IP.Dev
+                    </span>
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-center space-x-1">
+                        <a href="#home" class="px-4 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Home</a>
+                        <a href="#about" class="px-4 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">About</a>
+                        <a href="#portfolio" class="px-4 py-2 rounded-full text-sm font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-colors">Portfolio</a>
+                        
+                        <!-- Resume Link -->
+                        <a href="https://drive.google.com/file/d/1yVEGG8zTyXqY28AROoE61dU-aVzSbP9f/view?usp=sharing" target="_blank" class="px-4 py-2 rounded-full text-sm font-medium text-cyan-400 hover:text-cyan-300 transition-colors flex items-center gap-1">
+                            Resume <i data-lucide="external-link" class="w-3 h-3"></i>
+                        </a>
+
+                        <a href="#contact" class="ml-4 relative group inline-flex items-center px-5 py-2 rounded-full text-sm font-bold text-white overflow-hidden">
+                            <span class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 group-hover:from-cyan-400 group-hover:to-blue-500 transition-all"></span>
+                            <span class="relative flex items-center gap-1">
+                                Hubungi Saya <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-slate-300 hover:text-white hover:bg-white/10 transition-colors">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Panel -->
+        <div id="mobile-menu" class="hidden md:hidden absolute w-full bg-slate-900/95 backdrop-blur-xl border-b border-white/10">
+            <div class="px-4 pt-2 pb-3 space-y-2">
+                <a href="#home" class="block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-white/5 hover:text-cyan-400">Home</a>
+                <a href="#portfolio" class="block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-white/5 hover:text-cyan-400">Portfolio</a>
+                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-slate-200 hover:bg-white/5 hover:text-cyan-400">Contact</a>
+                <a href="https://drive.google.com/file/d/1yVEGG8zTyXqY28AROoE61dU-aVzSbP9f/view?usp=sharing" target="_blank" class="block px-3 py-2 rounded-md text-base font-medium text-cyan-400 hover:bg-white/5">Download Resume</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-32 pb-20 lg:pt-52 lg:pb-40 overflow-hidden min-h-screen flex items-center">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-16 items-center">
+                <!-- Text Content -->
+                <div class="lg:col-span-7 text-center lg:text-left reveal active">
+                    <div class="inline-flex items-center px-4 py-2 rounded-full border border-cyan-500/30 bg-cyan-500/5 text-cyan-300 text-sm font-medium mb-8 backdrop-blur-md">
+                        <span class="flex h-2.5 w-2.5 rounded-full bg-cyan-400 mr-3 animate-pulse shadow-[0_0_10px_rgba(34,211,238,0.5)]"></span>
+                        Data Expert & Full Stack Engineer
+                    </div>
+                    <h1 class="text-5xl lg:text-7xl font-extrabold tracking-tight text-white mb-8 leading-tight">
+                        Membangun <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-blue-400 to-indigo-400">Solusi Digital</span> <br/>Berbasis Data.
+                    </h1>
+                    <p class="text-xl text-slate-400 mb-10 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                        Saya Ilham Pradani. Mengubah data kompleks menjadi wawasan, dan ide menjadi aplikasi web & mobile yang powerful, dari backend hingga frontend.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-5 justify-center lg:justify-start">
+                        <!-- Download CV -->
+                        <a href="https://drive.google.com/file/d/1yVEGG8zTyXqY28AROoE61dU-aVzSbP9f/view?usp=sharing" target="_blank" class="relative group inline-flex justify-center items-center px-8 py-4 font-bold text-white rounded-full overflow-hidden shadow-lg shadow-cyan-500/25 hover:shadow-cyan-500/40 transition-all">
+                            <span class="absolute inset-0 bg-gradient-to-r from-cyan-500 to-blue-600 group-hover:scale-105 transition-transform duration-300"></span>
+                            <span class="relative flex items-center gap-2">
+                                <i data-lucide="download" class="w-5 h-5"></i> Download CV
+                            </span>
+                        </a>
+                        
+                        <!-- WA Bisnis -->
+                        <a href="https://wa.me/6287767340075" target="_blank" class="inline-flex justify-center items-center px-8 py-4 border-2 border-cyan-500/50 text-base font-bold rounded-full text-cyan-400 hover:bg-cyan-500/10 hover:text-white hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 backdrop-blur-sm transition-all gap-2">
+                            <i data-lucide="phone" class="w-5 h-5"></i> WA Bisnis
+                        </a>
+                    </div>
+                    
+                    <!-- Github CV Link -->
+                    <div class="mt-6 text-sm">
+                        <span class="text-slate-500">Atau lihat versi web: </span>
+                        <a href="https://github.com/ilhampradani8-bot/Ilham-Pradani---CV/blob/main/README.md" target="_blank" class="text-cyan-400 hover:text-cyan-300 underline decoration-cyan-500/30 underline-offset-4 transition-colors">
+                            GitHub CV (Markdown)
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Visuals -->
+                <div class="hidden lg:block lg:col-span-5 relative mt-12 lg:mt-0 reveal delay-200">
+                    <div class="relative z-10 grid grid-cols-2 gap-6 perspective-1000">
+                        <div class="space-y-6 translate-y-12">
+                            <div class="glass-card p-6 rounded-2xl animate-[float_6s_ease-in-out_infinite]">
+                                <i data-lucide="code" class="w-10 h-10 text-cyan-400 mb-4"></i>
+                                <h3 class="font-bold text-xl text-white">Full Stack</h3>
+                                <p class="text-sm text-slate-400">Web & Mobile Apps</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-2xl animate-[float_7s_ease-in-out_infinite] delay-100">
+                                <i data-lucide="database" class="w-10 h-10 text-blue-500 mb-4"></i>
+                                <h3 class="font-bold text-xl text-white">Data Expert</h3>
+                                <p class="text-sm text-slate-400">Analytics & Viz</p>
+                            </div>
+                        </div>
+                        <div class="space-y-6 -translate-y-4">
+                            <div class="glass-card p-6 rounded-2xl animate-[float_8s_ease-in-out_infinite] delay-200">
+                                <i data-lucide="server" class="w-10 h-10 text-indigo-400 mb-4"></i>
+                                <h3 class="font-bold text-xl text-white">Backend</h3>
+                                <p class="text-sm text-slate-400">Scalable Infra</p>
+                            </div>
+                            <div class="glass-card p-6 rounded-2xl animate-[float_5s_ease-in-out_infinite] delay-300">
+                                <i data-lucide="smartphone" class="w-10 h-10 text-purple-400 mb-4"></i>
+                                <h3 class="font-bold text-xl text-white">Mobile / Web3</h3>
+                                <p class="text-sm text-slate-400">Android & iOS</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-12 relative z-10">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="glass-card p-10 rounded-2xl reveal">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                    <div>
+                        <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400">20+</div>
+                        <div class="text-sm text-cyan-400 font-medium mt-2 uppercase tracking-wider">Proyek Selesai</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400">Expert</div>
+                        <div class="text-sm text-blue-400 font-medium mt-2 uppercase tracking-wider">Data Analyst</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400">Multi</div>
+                        <div class="text-sm text-indigo-400 font-medium mt-2 uppercase tracking-wider">Platform Dev</div>
+                    </div>
+                    <div>
+                        <div class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white to-slate-400">100%</div>
+                        <div class="text-sm text-purple-400 font-medium mt-2 uppercase tracking-wider">Komitmen Klien</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-24 relative z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-6">Karya & Pengalaman</h2>
+                <p class="text-slate-400 text-lg max-w-2xl mx-auto">
+                    Eksplorasi jejak digital saya dalam membangun solusi data-driven dan aplikasi berskala besar.
+                </p>
+            </div>
+
+            <!-- Filter Tabs -->
+            <div class="flex flex-wrap justify-center gap-3 mb-16 reveal delay-100" id="portfolio-filters">
+                <button data-filter="all" class="filter-btn active px-6 py-3 rounded-full text-sm font-bold transition-all relative overflow-hidden group bg-gradient-to-r from-cyan-600 to-blue-600 text-white shadow-lg shadow-cyan-500/20">
+                    Semua Proyek
+                </button>
+                <button data-filter="latest" class="filter-btn px-6 py-3 rounded-full text-sm font-bold transition-all relative overflow-hidden group text-slate-400 hover:text-white bg-slate-900/50 border border-white/5">
+                    Terbaru & Besar
+                </button>
+                <button data-filter="proyek2" class="filter-btn px-6 py-3 rounded-full text-sm font-bold transition-all relative overflow-hidden group text-slate-400 hover:text-white bg-slate-900/50 border border-white/5">
+                    Aplikasi & CMS
+                </button>
+                <button data-filter="paris" class="filter-btn px-6 py-3 rounded-full text-sm font-bold transition-all relative overflow-hidden group text-slate-400 hover:text-white bg-slate-900/50 border border-white/5">
+                    Paris Group
+                </button>
+            </div>
+
+            <!-- Projects Grid -->
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Projects will be injected here via JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 relative z-10 overflow-hidden">
+        <!-- Glow effect -->
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-900/20 blur-[120px] rounded-full pointer-events-none"></div>
+
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-20 reveal">
+            <h2 class="text-4xl md:text-5xl font-extrabold text-white mb-8">Kolaborasi Masa Depan?</h2>
+            <p class="text-slate-400 mb-16 text-xl max-w-3xl mx-auto leading-relaxed">
+                Saya siap membantu mewujudkan visi digital Anda, baik itu analisis data yang mendalam atau pengembangan sistem yang kompleks. Mari berdiskusi.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-8 mb-16">
+                <!-- WA Pribadi -->
+                <a href="https://wa.me/6288971071138" target="_blank" class="glass-card p-10 flex flex-col items-center group hover:border-green-500/40 rounded-2xl transition-all">
+                    <div class="h-16 w-16 bg-green-500/20 rounded-2xl flex items-center justify-center mb-6 text-green-400 group-hover:bg-green-500 group-hover:text-white transition-all shadow-lg shadow-green-900/20">
+                        <i data-lucide="message-circle" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">WhatsApp Pribadi</h3>
+                    <p class="text-slate-400 text-lg">0889-7107-1138</p>
+                    <span class="mt-6 text-sm text-green-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+                        Kirim Pesan <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+
+                <!-- WA Bisnis -->
+                <a href="https://wa.me/6287767340075" target="_blank" class="glass-card p-10 flex flex-col items-center group hover:border-cyan-500/40 rounded-2xl transition-all">
+                    <div class="h-16 w-16 bg-cyan-500/20 rounded-2xl flex items-center justify-center mb-6 text-cyan-400 group-hover:bg-cyan-500 group-hover:text-white transition-all shadow-lg shadow-cyan-900/20">
+                        <i data-lucide="phone" class="w-8 h-8"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-2">WhatsApp Bisnis</h3>
+                    <p class="text-slate-400 text-lg">0877-6734-0075</p>
+                    <span class="mt-6 text-sm text-cyan-400 opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+                        Jadwalkan Call <i data-lucide="chevron-right" class="w-4 h-4"></i>
+                    </span>
+                </a>
+            </div>
+
+            <!-- Social Links -->
+            <div class="flex flex-wrap justify-center gap-6">
+                <a href="mailto:ilhampradani8@gmail.com" class="px-6 py-3 rounded-full bg-slate-900/50 border border-white/10 flex items-center text-slate-300 hover:text-white hover:bg-white/10 hover:border-white/30 transition-all backdrop-blur-md gap-3">
+                    <i data-lucide="mail" class="w-5 h-5 text-cyan-500"></i> Email
+                </a>
+                <a href="https://linkedin.id/ilhampradani05" target="_blank" class="px-6 py-3 rounded-full bg-slate-900/50 border border-white/10 flex items-center text-slate-300 hover:text-white hover:bg-[#0077B5]/20 hover:border-[#0077B5]/50 transition-all backdrop-blur-md gap-3">
+                    <i data-lucide="linkedin" class="w-5 h-5 text-[#0077B5]"></i> LinkedIn
+                </a>
+                <a href="https://github.com/ilhampradani8-bot" target="_blank" class="px-6 py-3 rounded-full bg-slate-900/50 border border-white/10 flex items-center text-slate-300 hover:text-white hover:bg-white/10 hover:border-white/30 transition-all backdrop-blur-md gap-3">
+                    <i data-lucide="github" class="w-5 h-5 text-white"></i> GitHub
+                </a>
+                <a href="https://www.instagram.com/ilham_pradani_c.l?igsh=YzljYTk1ODg3Zg==" target="_blank" class="px-6 py-3 rounded-full bg-slate-900/50 border border-white/10 flex items-center text-slate-300 hover:text-white hover:bg-pink-600/20 hover:border-pink-500/50 transition-all backdrop-blur-md group gap-3">
+                    <i data-lucide="instagram" class="w-5 h-5 text-pink-500 group-hover:text-pink-400"></i> Instagram
+                </a>
+                <a href="https://www.facebook.com/share/1BqyqHomKg/" target="_blank" class="px-6 py-3 rounded-full bg-slate-900/50 border border-white/10 flex items-center text-slate-300 hover:text-white hover:bg-blue-600/20 hover:border-blue-500/50 transition-all backdrop-blur-md group gap-3">
+                    <i data-lucide="facebook" class="w-5 h-5 text-blue-500 group-hover:text-blue-400"></i> Facebook
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#05080F]/80 backdrop-blur-xl py-8 border-t border-white/5 relative z-20 mt-20">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="mb-4 flex items-center justify-center gap-2">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-blue-500 font-bold text-xl">IP.Dev</span>
+            </div>
+            <p class="text-slate-500 text-sm">
+                &copy; <script>document.write(new Date().getFullYear())</script> Ilham Pradani. Crafted with precision using Tailwind CSS.
+            </p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        // 1. DATA PROJECTS
+        const projects = [
+            {
+                title: "SOLVTECH",
+                category: "latest",
+                url: "https://solvtech-web-profile.vercel.app/",
+                desc: "Web profile profesional untuk layanan solusi teknologi terdepan.",
+                tech: "Company Profile / Tech"
+            },
+            {
+                title: "Airos ID",
+                category: "latest",
+                url: "https://airos.id",
+                desc: "Platform solusi digital modern dengan arsitektur scalable.",
+                tech: "Full Stack Web"
+            },
+            {
+                title: "MBG Satu Visi Raya",
+                category: "latest",
+                url: "https://mbg.satuvisiraya.com",
+                desc: "Sistem manajemen terpadu untuk operasional visi raya.",
+                tech: "Management System"
+            },
+            {
+                title: "iPusnas 2",
+                category: "latest",
+                url: "https://ipusnas2.perpusnas.go.id",
+                desc: "Perpustakaan digital nasional generasi kedua, menangani data skala besar.",
+                tech: "Big Data / Public Service"
+            },
+            {
+                title: "Trijaya Rev 3",
+                category: "latest",
+                url: "https://trijaya-rev-3.satuvisiraya.com",
+                desc: "Revisi major sistem manajemen Trijaya dengan optimalisasi kinerja.",
+                tech: "Corporate Web System"
+            },
+            {
+                title: "Trijaya Tissue",
+                category: "latest",
+                url: "https://trijayatissue.com",
+                desc: "Katalog produk dan company profile interaktif.",
+                tech: "E-Commerce Catalog"
+            },
+            {
+                title: "Sertifikasi Nelayan (BPPP Tegal)",
+                category: "proyek2",
+                url: "https://bppptegal.id/",
+                desc: "Aplikasi pendaftaran pelatihan dan sertifikasi untuk nelayan.",
+                tech: "GovTech App"
+            },
+            {
+                title: "Panel Admin Sertifikasi",
+                category: "proyek2",
+                url: "https://admin.bppptegal.id/",
+                desc: "Dashboard komprehensif untuk manajemen data peserta dan pelaporan.",
+                tech: "Admin Dashboard / Data Viz"
+            },
+            {
+                title: "Nutrisee",
+                category: "proyek2",
+                url: "https://www.nutrisee.id/",
+                desc: "Platform matching pembelajar dan mentor untuk mahasiswa ilmu gizi.",
+                tech: "EduTech Platform"
+            },
+            {
+                title: "Confiction Labs CMS",
+                category: "proyek2",
+                url: "https://www.confiction.com",
+                desc: "Content Management System kustom untuk kebutuhan perusahaan.",
+                tech: "Custom CMS"
+            },
+            {
+                title: "Play Rifstorm CMS",
+                category: "proyek2",
+                url: "https://www.playriftstorm.com/",
+                desc: "Backend management system untuk platform gaming Rifstorm.",
+                tech: "Gaming CMS Backend"
+            },
+            {
+                title: "Portal Riftstorm",
+                category: "proyek2",
+                url: "https://one.confiction.com/portal",
+                desc: "Portal akses pengguna terintegrasi tunggal.",
+                tech: "SSO / Web Portal"
+            },
+            {
+                title: "NFT XPSR24",
+                category: "proyek2",
+                url: "https://one.confiction.com/xpsr",
+                desc: "Implementasi teknologi blockchain dan NFT.",
+                tech: "Web3 / Blockchain"
+            },
+            {
+                title: "Laporan Asuransi (BPR)",
+                category: "proyek2",
+                url: "https://bprbonding.my.id/",
+                desc: "Automasi dan digitalisasi pembuatan laporan asuransi perbankan.",
+                tech: "FinTech / Data Reporting"
+            },
+            {
+                title: "Linimasa Paris Group",
+                category: "paris",
+                url: "https://parisgroup.cloud/linimasa.html",
+                desc: "Sistem pelacakan timeline proyek interaktif.",
+                tech: "Project Tracking"
+            },
+            {
+                title: "E-Commerce Paris",
+                category: "paris",
+                url: "https://e-comerce.parisgroup.cloud",
+                desc: "Platform e-commerce lengkap dengan manajemen produk.",
+                tech: "Full Stack E-Commerce"
+            },
+            {
+                title: "Developer Portal",
+                category: "paris",
+                url: "https://developer.parisgroup.cloud",
+                desc: "Hub sumber daya teknis untuk pengembang internal/eksternal.",
+                tech: "DevTools Portal"
+            },
+            {
+                title: "Sistem Akuntan",
+                category: "paris",
+                url: "https://akuntan.parisgroup.cloud",
+                desc: "Aplikasi akuntansi dan manajemen keuangan berbasis web.",
+                tech: "Accounting SaaS"
+            }
+        ];
+
+        // 2. RENDER PROJECTS FUNCTION
+        function renderProjects(filter = 'all') {
+            const container = document.getElementById('projects-grid');
+            container.innerHTML = '';
+            
+            const filtered = filter === 'all' 
+                ? projects 
+                : projects.filter(p => p.category === filter);
+
+            filtered.forEach((p, index) => {
+                const card = document.createElement('div');
+                // Base classes
+                card.className = "glass-card p-7 rounded-2xl flex flex-col relative group opacity-0 transform translate-y-8 transition-all duration-500 ease-out";
+                card.style.animationDelay = `${index * 100}ms`;
+                
+                // Add content
+                card.innerHTML = `
+                    <div class="absolute inset-0 bg-gradient-to-t from-cyan-900/20 via-transparent to-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none rounded-2xl"></div>
+                    <div class="flex items-start justify-between mb-5 relative z-10">
+                        <span class="text-xs font-bold px-3 py-1.5 rounded-full bg-cyan-950/50 text-cyan-300 border border-cyan-800/50 backdrop-blur-md shadow-sm">
+                            ${p.tech}
+                        </span>
+                        <a href="${p.url}" target="_blank" class="text-slate-500 hover:text-cyan-400 transition-colors p-1 bg-slate-800/50 rounded-full hover:bg-cyan-900/30">
+                            <i data-lucide="external-link" class="w-5 h-5"></i>
+                        </a>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-3 leading-tight group-hover:text-cyan-400 transition-colors relative z-10">
+                        ${p.title}
+                    </h3>
+                    <p class="text-slate-400 text-base mb-8 flex-grow leading-relaxed border-t border-white/5 pt-4 relative z-10">
+                        ${p.desc}
+                    </p>
+                    <a href="${p.url}" target="_blank" class="mt-auto inline-flex items-center text-sm font-bold text-cyan-400 hover:text-white transition-colors group/link relative z-10">
+                        Kunjungi Live Site <i data-lucide="arrow-up-right" class="w-4 h-4 ml-2 group-hover/link:rotate-45 transition-transform"></i>
+                    </a>
+                `;
+                
+                container.appendChild(card);
+                
+                // Trigger animation frame for fade in
+                setTimeout(() => {
+                    card.classList.remove('opacity-0', 'translate-y-8');
+                }, 50 + (index * 50));
+            });
+            
+            // Re-initialize icons for new elements
+            lucide.createIcons();
+        }
+
+        // 3. INITIALIZATION
+        document.addEventListener('DOMContentLoaded', () => {
+            // Render icons
+            lucide.createIcons();
+            
+            // Render initial projects
+            renderProjects('all');
+
+            // Scroll Animation (Intersection Observer)
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 20) {
+                    navbar.classList.add('glass-nav', 'shadow-lg');
+                    navbar.classList.remove('py-4');
+                } else {
+                    navbar.classList.remove('glass-nav', 'shadow-lg');
+                    navbar.classList.add('py-4');
+                }
+            });
+
+            // Mobile Menu Toggle
+            const btn = document.getElementById('mobile-menu-btn');
+            const menu = document.getElementById('mobile-menu');
+            btn.addEventListener('click', () => {
+                menu.classList.toggle('hidden');
+            });
+
+            // Filter Tabs Logic
+            const buttons = document.querySelectorAll('.filter-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Remove active class from all
+                    buttons.forEach(b => {
+                        b.classList.remove('bg-gradient-to-r', 'from-cyan-600', 'to-blue-600', 'text-white', 'shadow-lg');
+                        b.classList.add('text-slate-400', 'bg-slate-900/50');
+                    });
+                    
+                    // Add active class to clicked
+                    btn.classList.remove('text-slate-400', 'bg-slate-900/50');
+                    btn.classList.add('bg-gradient-to-r', 'from-cyan-600', 'to-blue-600', 'text-white', 'shadow-lg');
+                    
+                    renderProjects(btn.getAttribute('data-filter'));
+                });
+            });
+        });
+    </script>
+</body>
+</html>
